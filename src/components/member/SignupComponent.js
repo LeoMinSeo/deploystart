@@ -275,7 +275,7 @@ const SignUpComponent = () => {
   }, []);
 
   return (
-    <div className="p-7 bg-white rounded-3xl w-full shadow-lg shadow-black/30 transform scale-100 transition-transform duration-700 delay-200">
+    <>
       {error && (
         <div className="text-red-500 text-sm mb-1 text-center">{error}</div>
       )}
@@ -579,7 +579,7 @@ const SignUpComponent = () => {
       >
         가입완료
       </button>
-    </div>
+    </>
   );
 };
 
