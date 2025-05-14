@@ -18,44 +18,58 @@ import PhoneInput from "../signup/PhoneInput";
 import AgreementSection from "../signup/AgreementSection";
 import AddressSearch from "../customModal/AddressSearch";
 
-// 스타일 충돌을 방지하기 위한 래퍼 컴포넌트
-const SignUpWrapper = styled.div`
-  /* 이 스타일은 이 컴포넌트와 자식 요소에만 적용됩니다 */
-  background-color: white;
-  padding: 1rem;
-  margin: 0;
-  width: 100%;
+// LoginComponent에서 가져온 스타일드 컴포넌트 추가
+const Form = styled.div`
+  padding: 1.8rem;
+  background-color: #ffffff;
   border-radius: 1.5rem;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+  transform: scale(1);
+  transition: 0.7s ease-in-out;
+  transition-delay: 0.2s;
+`;
 
-  /* 부모 컴포넌트의 스타일이 덮어쓰지 못하도록 !important 사용 */
-  box-shadow: none !important;
-  transform: none !important;
-  transition: none !important;
-  margin-top: 0 !important;
+const InputGroup = styled.div`
+  position: relative;
+  width: 90%;
+  margin: 0.9rem 0;
+`;
 
-  /* 다른 필요한 스타일 오버라이드 추가 */
-  input,
-  button,
-  div {
-    margin-left: 0 !important;
+const Input = styled.input`
+  width: 100%;
+  padding: 0.8rem 2rem;
+  font-size: 0.9rem;
+  background-color: #efefef;
+  border-radius: 0.4rem;
+  border: 0.1rem solid #ffffff;
+  outline: none;
+  margin-left: 1.2rem;
+
+  &:focus {
+    border: 0.1rem solid #fb923c;
   }
+`;
 
-  /* 자식 컴포넌트 스타일링 */
-  .text-red-500 {
-    color: #ef4444 !important;
-  }
+const Icon = styled.i`
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  color: #757575;
+`;
 
-  .text-sm {
-    font-size: 0.875rem !important;
-  }
-
-  .mb-1 {
-    margin-bottom: 0.25rem !important;
-  }
-
-  .text-center {
-    text-align: center !important;
-  }
+const Button = styled.button`
+  cursor: pointer;
+  width: 90%;
+  padding: 0.5rem 0;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #fb923c;
+  color: #ffffff;
+  font-size: 1.2rem;
+  outline: none;
 `;
 
 const SignUpComponent = () => {
@@ -297,17 +311,17 @@ const SignUpComponent = () => {
   }, []);
 
   return (
-    <SignUpWrapper>
+    <Form>
+      {" "}
+      {/* div에서 Form으로 변경 */}
       {error && (
         <div className="text-red-500 text-sm mb-1 text-center">{error}</div>
       )}
-
       <UserIdInput
         userId={formData.userId}
         onChange={handleChange}
         onCheck={handleUserIdCheck}
       />
-
       <PasswordInput
         password={formData.userPw}
         confirmPassword={formData.confirmPassword}
@@ -319,13 +333,11 @@ const SignUpComponent = () => {
         togglePasswordVisibility={togglePasswordVisibility}
         toggleConfirmPasswordVisibility={toggleConfirmPasswordVisibility}
       />
-
       <ProfileInputs
         formData={formData}
         onChange={handleChange}
         onAddressSearchClick={() => setIsAddressModalOpen(true)}
       />
-
       <EmailInput
         userEmailId={formData.userEmailId}
         userEmailDomain={formData.userEmailDomain}
@@ -334,26 +346,22 @@ const SignUpComponent = () => {
         setCustomDomainInput={setCustomDomainInput}
         onChange={handleChange}
       />
-
       <PhoneInput
         formattedPhone={formattedPhone}
         phoneError={phoneError}
         onChange={handleChange}
       />
-
       <AgreementSection
         formData={formData}
         onChange={handleChange}
         handleCheckAll={handleCheckAll}
       />
-
       {/* AddressSearch 컴포넌트 추가 */}
       <AddressSearch
         isOpen={isAddressModalOpen}
         onClose={() => setIsAddressModalOpen(false)}
         onAddressSelect={handleAddressSelect}
       />
-
       <SignupButton
         type="submit"
         onClick={handleSubmit}
@@ -361,7 +369,7 @@ const SignUpComponent = () => {
       >
         가입완료
       </SignupButton>
-    </SignUpWrapper>
+    </Form>
   );
 };
 
