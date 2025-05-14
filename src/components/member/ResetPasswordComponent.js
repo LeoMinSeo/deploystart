@@ -14,7 +14,7 @@ const ResetPasswordComponent = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8089/user/reset-password",
+        "http://audimew:8080/api/user/reset-password",
         {
           token,
           password: newPassword,

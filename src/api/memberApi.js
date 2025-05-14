@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `http://localhost:8089/api/member`;
+const host = `http://audimew:8080/api/member`;
 
 // 회원 API를 위한 axios 인스턴스 생성
 const memberApi = axios.create({
@@ -63,7 +63,7 @@ memberApi.interceptors.response.use(
         const refreshToken = localStorage.getItem("refreshToken");
         console.log("여기로옴?", refreshToken);
         const response = await axios.post(
-          "http://localhost:8089/auth/refresh",
+          "http://audimew:8080/api/auth/refresh",
           { refreshToken }
         );
 

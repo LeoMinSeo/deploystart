@@ -7,6 +7,7 @@ import {
   validatePhoneNumber,
   passwordRegex,
 } from "../signup/utils";
+import styled from "styled-components"; // styled-components 추가
 
 // 개별 컴포넌트 임포트
 import UserIdInput from "../signup/UserIdInput";
@@ -16,6 +17,46 @@ import EmailInput from "../signup/EmailInput";
 import PhoneInput from "../signup/PhoneInput";
 import AgreementSection from "../signup/AgreementSection";
 import AddressSearch from "../customModal/AddressSearch";
+
+// 스타일 충돌을 방지하기 위한 래퍼 컴포넌트
+const SignUpWrapper = styled.div`
+  /* 이 스타일은 이 컴포넌트와 자식 요소에만 적용됩니다 */
+  background-color: white;
+  padding: 1rem;
+  margin: 0;
+  width: 100%;
+  border-radius: 1.5rem;
+
+  /* 부모 컴포넌트의 스타일이 덮어쓰지 못하도록 !important 사용 */
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none !important;
+  margin-top: 0 !important;
+
+  /* 다른 필요한 스타일 오버라이드 추가 */
+  input,
+  button,
+  div {
+    margin-left: 0 !important;
+  }
+
+  /* 자식 컴포넌트 스타일링 */
+  .text-red-500 {
+    color: #ef4444 !important;
+  }
+
+  .text-sm {
+    font-size: 0.875rem !important;
+  }
+
+  .mb-1 {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+`;
 
 const SignUpComponent = () => {
   const navigate = useNavigate();
@@ -256,7 +297,7 @@ const SignUpComponent = () => {
   }, []);
 
   return (
-    <div>
+    <SignUpWrapper>
       {error && (
         <div className="text-red-500 text-sm mb-1 text-center">{error}</div>
       )}
@@ -320,7 +361,7 @@ const SignUpComponent = () => {
       >
         가입완료
       </SignupButton>
-    </div>
+    </SignUpWrapper>
   );
 };
 

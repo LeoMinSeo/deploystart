@@ -28,7 +28,7 @@ const ReviewModal = ({ isOpen, onClose, item, onSuccess }) => {
       };
 
       await axios.post(
-        "http://localhost:8089/api/member/add/review",
+        "http://audimew:8080/api/member/add/review",
         reviewData
       );
 

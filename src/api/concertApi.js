@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://localhost:8089/concert";
+const host = "http://audimew:8080/api/concert";
 
 export const getList = async (pageRequest, category) => {
   const res = await axios.get(`${host}/list/${category}`, {
