@@ -289,12 +289,12 @@ const SignUpComponent = () => {
           placeholder="아이디를 입력해주세요"
           value={formData.userId}
           onChange={handleChange}
-          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400 flex-grow"
+          className="w-full pl-10 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400 flex-grow"
         />
         <button
           type="button"
           onClick={handleUserIdCheck}
-          className="ml-4 py-3 px-1 bg-orange-400 text-xs text-white rounded-lg border-none outline-none mt-0.5 w-auto cursor-pointer"
+          className="ml-2 py-2.5 px-1 bg-orange-400 text-xs text-white rounded-md border-none outline-none w-20 h-10 flex items-center justify-center"
         >
           중복 확인
         </button>
@@ -309,7 +309,7 @@ const SignUpComponent = () => {
           placeholder="비밀번호를 입력해주세요"
           value={formData.userPw}
           onChange={handleChange}
-          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+          className="w-full pl-10 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400"
         />
         <span
           className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -337,7 +337,7 @@ const SignUpComponent = () => {
           placeholder="비밀번호를 재입력해주세요"
           value={formData.confirmPassword}
           onChange={handleChange}
-          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+          className="w-full pl-10 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400"
         />
         <span
           className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
@@ -366,7 +366,7 @@ const SignUpComponent = () => {
       )}
 
       {/* ProfileInputs 컴포넌트 */}
-      <div className="mb-3">
+      <div className="mb-2">
         <div className="mb-2">
           <div className="relative w-full my-2">
             <i className="bx bxs-user absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
@@ -376,7 +376,7 @@ const SignUpComponent = () => {
               value={formData.userName}
               onChange={handleChange}
               placeholder="이름을 입력해주세요"
-              className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+              className="w-full pl-10 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400"
             />
           </div>
         </div>
@@ -389,13 +389,13 @@ const SignUpComponent = () => {
             value={formData.userAddress}
             onChange={handleChange}
             placeholder="주소를 검색해주세요"
-            className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none flex-grow"
+            className="w-full pl-10 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none flex-grow"
             readOnly
           />
           <button
             type="button"
             onClick={() => setIsAddressModalOpen(true)}
-            className="ml-4 py-3 px-1 bg-orange-400 text-xs text-white rounded-lg border-none outline-none mt-0.5 w-auto cursor-pointer"
+            className="ml-2 py-2.5 px-1 bg-orange-400 text-xs text-white rounded-md border-none outline-none w-20 h-10 flex items-center justify-center"
           >
             주소 찾기
           </button>
@@ -412,9 +412,9 @@ const SignUpComponent = () => {
             placeholder="이메일 아이디"
             value={formData.userEmailId}
             onChange={handleChange}
-            className="pl-4 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400 w-1/3 mr-0"
+            className="pl-2 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400 w-2/5 mr-1"
           />
-          <span>@</span>
+          <span className="mx-1">@</span>
 
           {customDomainInput ? (
             <input
@@ -427,7 +427,7 @@ const SignUpComponent = () => {
                   target: { name: "userEmailDomain", value: e.target.value },
                 })
               }
-              className="pl-4 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400 w-1/3"
+              className="pl-2 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400 w-2/5"
             />
           ) : (
             <input
@@ -436,11 +436,11 @@ const SignUpComponent = () => {
               placeholder="도메인 선택"
               value={formData.userEmailDomain}
               readOnly
-              className="pl-4 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none w-1/3"
+              className="pl-2 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none w-2/5"
             />
           )}
 
-          <div className="ml-2 w-1/3">
+          <div className="ml-1 w-1/5">
             <select
               name="userEmailDomain"
               value={customDomainInput ? "custom" : formData.userEmailDomain}
@@ -455,7 +455,7 @@ const SignUpComponent = () => {
                   handleChange(e);
                 }
               }}
-              className="w-full border rounded-md p-2.5 bg-gray-100"
+              className="w-full border border-gray-100 rounded-md py-2.5 px-1 bg-gray-100 text-sm"
             >
               <option value="">선택</option>
               <option value="naver.com">naver.com</option>
@@ -483,7 +483,7 @@ const SignUpComponent = () => {
           name="userPhoneNum"
           value={isFocused || formattedPhone !== "010" ? formattedPhone : ""}
           onChange={handleChange}
-          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+          className="w-full pl-10 py-2.5 text-sm bg-gray-100 rounded-md border border-white outline-none focus:border-orange-400"
           placeholder={!isFocused ? "휴대폰 번호를 입력해주세요(-제외)" : ""}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
@@ -575,7 +575,7 @@ const SignUpComponent = () => {
         type="submit"
         onClick={handleSubmit}
         disabled={isSubmitting}
-        className="w-full py-2 px-8 bg-orange-400 text-lg text-white rounded-lg border-none outline-none mt-0 cursor-pointer"
+        className="w-full py-2 px-8 bg-orange-400 text-base text-white rounded-md border-none outline-none cursor-pointer mt-2"
       >
         가입완료
       </button>
