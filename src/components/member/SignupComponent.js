@@ -1,76 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser, checkId } from "../../api/memberApi";
-import { SignupButton } from "../signup/styles";
-import {
-  formatPhoneNumber,
-  validatePhoneNumber,
-  passwordRegex,
-} from "../signup/utils";
-import styled from "styled-components"; // styled-components 추가
-
-// 개별 컴포넌트 임포트
-import UserIdInput from "../signup/UserIdInput";
-import PasswordInput from "../signup/PasswordInput";
-import ProfileInputs from "../signup/ProfileInputs";
-import EmailInput from "../signup/EmailInput";
-import PhoneInput from "../signup/PhoneInput";
-import AgreementSection from "../signup/AgreementSection";
 import AddressSearch from "../customModal/AddressSearch";
 
-// LoginComponent에서 가져온 스타일드 컴포넌트 추가
-const Form = styled.div`
-  padding: 1.8rem;
-  background-color: #ffffff;
-  border-radius: 1.5rem;
-  width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
-  transform: scale(1);
-  transition: 0.7s ease-in-out;
-  transition-delay: 0.2s;
-`;
+// utils 함수들
+const formatPhoneNumber = (value) => {
+  if (!value) return "";
 
-const InputGroup = styled.div`
-  position: relative;
-  width: 90%;
-  margin: 0.9rem 0;
-`;
+  const numbers = value.replace(/[^\d]/g, "");
 
-const Input = styled.input`
-  width: 100%;
-  padding: 0.8rem 2rem;
-  font-size: 0.9rem;
-  background-color: #efefef;
-  border-radius: 0.4rem;
-  border: 0.1rem solid #ffffff;
-  outline: none;
-  margin-left: 1.2rem;
-
-  &:focus {
-    border: 0.1rem solid #fb923c;
+  if (numbers.length <= 3) {
+    return numbers;
+  } else if (numbers.length <= 7) {
+    return `${numbers.slice(0, 3)}-${numbers.slice(3)}`;
+  } else {
+    return `${numbers.slice(0, 3)}-${numbers.slice(3, 7)}-${numbers.slice(
+      7,
+      11
+    )}`;
   }
-`;
+};
 
-const Icon = styled.i`
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  font-size: 1.4rem;
-  color: #757575;
-`;
+const validatePhoneNumber = (number) => {
+  if (!number) {
+    return { isValid: true, message: "" };
+  }
 
-const Button = styled.button`
-  cursor: pointer;
-  width: 90%;
-  padding: 0.5rem 0;
-  border-radius: 0.5rem;
-  border: none;
-  background-color: #fb923c;
-  color: #ffffff;
-  font-size: 1.2rem;
-  outline: none;
-`;
+  const validLength = number.length >= 11 && number.length <= 11;
+
+  if (!validLength) {
+    return { isValid: false, message: "유효하지 않은 휴대폰 번호입니다." };
+  } else {
+    return { isValid: true, message: "" };
+  }
+};
+
+const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
 const SignUpComponent = () => {
   const navigate = useNavigate();
@@ -100,7 +65,8 @@ const SignUpComponent = () => {
   const [customDomainInput, setCustomDomainInput] = useState(false);
   const [formattedPhone, setFormattedPhone] = useState("010");
   const [phoneError, setPhoneError] = useState("");
-  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false); // 주소 모달 상태 추가
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -175,8 +141,6 @@ const SignUpComponent = () => {
     setFormData((prevState) => ({
       ...prevState,
       userAddress: address,
-      // 우편번호도 저장하고 싶다면 아래 줄 주석 해제
-      // userZonecode: zonecode,
     }));
   };
 
@@ -311,65 +275,311 @@ const SignUpComponent = () => {
   }, []);
 
   return (
-    <Form>
-      {" "}
-      {/* div에서 Form으로 변경 */}
+    <div className="p-7 bg-white rounded-3xl w-full shadow-lg shadow-black/30 transform scale-100 transition-transform duration-700 delay-200">
       {error && (
         <div className="text-red-500 text-sm mb-1 text-center">{error}</div>
       )}
-      <UserIdInput
-        userId={formData.userId}
-        onChange={handleChange}
-        onCheck={handleUserIdCheck}
-      />
-      <PasswordInput
-        password={formData.userPw}
-        confirmPassword={formData.confirmPassword}
-        showPassword={showPassword}
-        showConfirmPassword={showConfirmPassword}
-        passwordValid={passwordValid}
-        passwordMatch={passwordMatch}
-        onChange={handleChange}
-        togglePasswordVisibility={togglePasswordVisibility}
-        toggleConfirmPasswordVisibility={toggleConfirmPasswordVisibility}
-      />
-      <ProfileInputs
-        formData={formData}
-        onChange={handleChange}
-        onAddressSearchClick={() => setIsAddressModalOpen(true)}
-      />
-      <EmailInput
-        userEmailId={formData.userEmailId}
-        userEmailDomain={formData.userEmailDomain}
-        userEmail={formData.userEmail}
-        customDomainInput={customDomainInput}
-        setCustomDomainInput={setCustomDomainInput}
-        onChange={handleChange}
-      />
-      <PhoneInput
-        formattedPhone={formattedPhone}
-        phoneError={phoneError}
-        onChange={handleChange}
-      />
-      <AgreementSection
-        formData={formData}
-        onChange={handleChange}
-        handleCheckAll={handleCheckAll}
-      />
-      {/* AddressSearch 컴포넌트 추가 */}
+
+      {/* UserIdInput 컴포넌트 */}
+      <div className="relative w-full my-2 flex items-center">
+        <i className="bx bxs-user absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+        <input
+          type="text"
+          name="userId"
+          placeholder="아이디를 입력해주세요"
+          value={formData.userId}
+          onChange={handleChange}
+          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400 flex-grow"
+        />
+        <button
+          type="button"
+          onClick={handleUserIdCheck}
+          className="ml-4 py-3 px-1 bg-orange-400 text-xs text-white rounded-lg border-none outline-none mt-0.5 w-auto cursor-pointer"
+        >
+          중복 확인
+        </button>
+      </div>
+
+      {/* PasswordInput 컴포넌트 */}
+      <div className="relative w-full my-2">
+        <i className="bx bxs-lock-alt absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+        <input
+          type={showPassword ? "text" : "password"}
+          name="userPw"
+          placeholder="비밀번호를 입력해주세요"
+          value={formData.userPw}
+          onChange={handleChange}
+          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+        />
+        <span
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+          onClick={togglePasswordVisibility}
+        >
+          <img
+            src={showPassword ? "/images/showPw.png" : "/images/hidePw.png"}
+            alt="아이콘"
+            width="24"
+            height="24"
+          />
+        </span>
+      </div>
+      {!passwordValid && formData.userPw && (
+        <div className="text-xs text-red-600 mb-2 text-start pl-1">
+          영문, 특수문자, 숫자를 모두 포함해야 하며 6글자 이상입니다.
+        </div>
+      )}
+
+      <div className="relative w-full my-2">
+        <i className="bx bxs-lock-alt absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+        <input
+          type={showConfirmPassword ? "text" : "password"}
+          name="confirmPassword"
+          placeholder="비밀번호를 재입력해주세요"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+        />
+        <span
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+          onClick={toggleConfirmPasswordVisibility}
+        >
+          <img
+            src={
+              showConfirmPassword ? "/images/showPw.png" : "/images/hidePw.png"
+            }
+            alt="아이콘"
+            width="24"
+            height="24"
+          />
+        </span>
+      </div>
+      {formData.confirmPassword && (
+        <div
+          className={`text-xs mb-2 text-start pl-1 ${
+            passwordMatch ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {passwordMatch
+            ? "비밀번호가 일치합니다."
+            : "비밀번호가 일치하지 않습니다."}
+        </div>
+      )}
+
+      {/* ProfileInputs 컴포넌트 */}
+      <div className="mb-3">
+        <div className="mb-2">
+          <div className="relative w-full my-2">
+            <i className="bx bxs-user absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+            <input
+              type="text"
+              name="userName"
+              value={formData.userName}
+              onChange={handleChange}
+              placeholder="이름을 입력해주세요"
+              className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+            />
+          </div>
+        </div>
+
+        <div className="relative w-full my-2 flex items-center">
+          <i className="bx bxs-map absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+          <input
+            type="text"
+            name="userAddress"
+            value={formData.userAddress}
+            onChange={handleChange}
+            placeholder="주소를 검색해주세요"
+            className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none flex-grow"
+            readOnly
+          />
+          <button
+            type="button"
+            onClick={() => setIsAddressModalOpen(true)}
+            className="ml-4 py-3 px-1 bg-orange-400 text-xs text-white rounded-lg border-none outline-none mt-0.5 w-auto cursor-pointer"
+          >
+            주소 찾기
+          </button>
+        </div>
+      </div>
+
+      {/* EmailInput 컴포넌트 */}
+      <div className="relative w-full my-2">
+        <i className="bx bxs-envelope absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+        <div className="flex w-full items-center">
+          <input
+            type="text"
+            name="userEmailId"
+            placeholder="이메일 아이디"
+            value={formData.userEmailId}
+            onChange={handleChange}
+            className="pl-4 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400 w-1/3 mr-0"
+          />
+          <span>@</span>
+
+          {customDomainInput ? (
+            <input
+              type="text"
+              name="userEmailDomain"
+              placeholder="도메인 입력"
+              value={formData.userEmailDomain}
+              onChange={(e) =>
+                handleChange({
+                  target: { name: "userEmailDomain", value: e.target.value },
+                })
+              }
+              className="pl-4 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400 w-1/3"
+            />
+          ) : (
+            <input
+              type="text"
+              name="userEmailDomain"
+              placeholder="도메인 선택"
+              value={formData.userEmailDomain}
+              readOnly
+              className="pl-4 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none w-1/3"
+            />
+          )}
+
+          <div className="ml-2 w-1/3">
+            <select
+              name="userEmailDomain"
+              value={customDomainInput ? "custom" : formData.userEmailDomain}
+              onChange={(e) => {
+                if (e.target.value === "custom") {
+                  setCustomDomainInput(true);
+                  handleChange({
+                    target: { name: "userEmailDomain", value: "" },
+                  });
+                } else {
+                  setCustomDomainInput(false);
+                  handleChange(e);
+                }
+              }}
+              className="w-full border rounded-md p-2.5 bg-gray-100"
+            >
+              <option value="">선택</option>
+              <option value="naver.com">naver.com</option>
+              <option value="gmail.com">gmail.com</option>
+              <option value="daum.net">daum.net</option>
+              <option value="custom">직접 입력</option>
+            </select>
+          </div>
+        </div>
+
+        <input
+          type="email"
+          name="userEmail"
+          value={formData.userEmail}
+          readOnly
+          className="hidden"
+        />
+      </div>
+
+      {/* PhoneInput 컴포넌트 */}
+      <div className="relative w-full my-2">
+        <i className="bx bxs-phone absolute top-1/2 left-4 transform -translate-y-1/2 text-xl text-gray-500"></i>
+        <input
+          type="text"
+          name="userPhoneNum"
+          value={isFocused || formattedPhone !== "010" ? formattedPhone : ""}
+          onChange={handleChange}
+          className="w-full pl-10 py-3 text-sm bg-gray-100 rounded-lg border border-white outline-none focus:border-orange-400"
+          placeholder={!isFocused ? "휴대폰 번호를 입력해주세요(-제외)" : ""}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
+      </div>
+      <div className="text-start">
+        {formattedPhone && (
+          <div className="text-red-600 text-xs mt-1 ml-1">{phoneError}</div>
+        )}
+      </div>
+
+      {/* AgreementSection 컴포넌트 */}
+      <div className="my-4 text-left">
+        <div className="mb-2">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              checked={
+                formData.agreeAge &&
+                formData.agreeTerms &&
+                formData.agreePrivacy &&
+                formData.agreeComercial
+              }
+              onChange={handleCheckAll}
+              className="mr-2"
+            />
+            <span className="text-sm">전체 동의</span>
+          </label>
+        </div>
+        <div className="mb-1">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="agreeAge"
+              checked={formData.agreeAge}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <span className="text-sm">(필수) 만 14세 이상 입니다.</span>
+          </label>
+        </div>
+        <div className="mb-1">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="agreeTerms"
+              checked={formData.agreeTerms}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <span className="text-sm">(필수) 이용약관 동의</span>
+          </label>
+        </div>
+        <div className="mb-1">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="agreePrivacy"
+              checked={formData.agreePrivacy}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <span className="text-sm">(필수) 개인정보 처리방침 동의</span>
+          </label>
+        </div>
+        <div className="mb-1">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="agreeComercial"
+              checked={formData.agreeComercial}
+              onChange={handleChange}
+              className="mr-2"
+            />
+            <span className="text-sm">(선택) 마케팅 정보 수신 동의</span>
+          </label>
+        </div>
+      </div>
+
+      {/* AddressSearch 컴포넌트 */}
       <AddressSearch
         isOpen={isAddressModalOpen}
         onClose={() => setIsAddressModalOpen(false)}
         onAddressSelect={handleAddressSelect}
       />
-      <SignupButton
+
+      {/* 회원가입 버튼 */}
+      <button
         type="submit"
         onClick={handleSubmit}
         disabled={isSubmitting}
+        className="w-full py-2 px-8 bg-orange-400 text-lg text-white rounded-lg border-none outline-none mt-0 cursor-pointer"
       >
         가입완료
-      </SignupButton>
-    </Form>
+      </button>
+    </div>
   );
 };
 
