@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { RouterProvider } from "react-router-dom";
 import root from "./router/root";
 
