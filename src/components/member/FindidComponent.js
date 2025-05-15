@@ -15,7 +15,7 @@ function FindidComponent() {
 
     try {
       const response = await axios.post(
-        `http://audimew:8080/api/member/findId`,
+        `http://audimew.shop:8089/api/member/findId`,
         {
           userName: name,
           userEmail: email,

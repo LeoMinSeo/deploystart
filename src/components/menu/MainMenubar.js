@@ -22,7 +22,7 @@ const MainMenubar = ({ currentIndex, currentPage }) => {
   }, []);
 
   const handleLogout = async () => {
-    const res = await axios.post(`http://audimew:8080/api/auth/logout`, {
+    const res = await axios.post(`http://audimew.shop:8089/api/auth/logout`, {
       refreshToken: localStorage.getItem("refreshToken"),
     });
     console.log(res);
