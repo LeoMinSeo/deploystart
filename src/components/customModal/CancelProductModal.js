@@ -27,7 +27,7 @@ const CancelProductModal = ({
     };
     refundProduct(data).then((i) => {
       alert(i);
-      console.log(i);
+   
       refreshData();
       onClose();
     });

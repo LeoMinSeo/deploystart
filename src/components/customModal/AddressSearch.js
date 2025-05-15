@@ -17,8 +17,7 @@ function AddressSearch({ isOpen, onClose, onAddressSelect }) {
       fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
     }
 
-    console.log(fullAddress); // 전체 주소
-    console.log(data.zonecode); // 우편번호
+
 
     onAddressSelect(fullAddress, data.zonecode);
     onClose();

@@ -55,7 +55,7 @@ const BasketComponent = () => {
 
   // 아이템 제거 함수
   const removeItem = (cartNo) => {
-    console.log(cartNo);
+    
     deleteFromCart(cartNo).then(() => {
       setRefresh(refresh + 1);
     });
@@ -63,9 +63,9 @@ const BasketComponent = () => {
 
   const totalPrice = cartData.reduce((sum, item) => {
     const price = item.productDTO.price;
-    console.log("Price before replace:", price); // 가격을 출력하여 문제 확인
+   
     const cleanedPrice = price.replace(/[^0-9]/g, "");
-    console.log("Cleaned Price:", cleanedPrice); // 정리된 가격 출력
+    
     const priceNumber = parseInt(cleanedPrice);
     if (isNaN(priceNumber)) {
       console.error(`Invalid price format: ${price}`);
@@ -107,7 +107,7 @@ const BasketComponent = () => {
                   <img
                     src={
                       item.productDTO.uploadFileNames.length > 0
-                        ? `http://localhost:8089/product/view/s_${item.productDTO.uploadFileNames[0]}`
+                        ? `https://audimew.shop/product/view/s_${item.productDTO.uploadFileNames[0]}`
                         : "/images/defalt.png"
                     }
                     alt={item.productDTO.pname}

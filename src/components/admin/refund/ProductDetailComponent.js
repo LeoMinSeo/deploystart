@@ -18,7 +18,7 @@ const ProductDetailComponent = () => {
       try {
         const data = await getProductRefundDetail(refundId);
         setRefundDetail(data);
-        console.log("받아온데이타", data);
+        
       } catch (error) {
         console.error("환불 정보 로딩 중 오류:", error);
       } finally {
@@ -146,7 +146,7 @@ const ProductDetailComponent = () => {
               <img
                 src={
                   refundDetail.productImgFileName
-                    ? `http://localhost:8089/product/view/${refundDetail.productImgFileName}`
+                    ? `https://audimew.shop/product/view/${refundDetail.productImgFileName}`
                     : "/images/defalt.png"
                 }
                 alt={refundDetail.pname}

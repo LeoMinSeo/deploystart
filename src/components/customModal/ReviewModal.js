@@ -28,7 +28,7 @@ const ReviewModal = ({ isOpen, onClose, item, onSuccess }) => {
       };
 
       await axios.post(
-        "http://audimew.shop:8089/api/member/add/review",
+        "https://audimew.shop/api/member/add/review",
         reviewData
       );
 
@@ -54,7 +54,7 @@ const ReviewModal = ({ isOpen, onClose, item, onSuccess }) => {
             <img
               src={
                 item.imgFileName
-                  ? `http://localhost:8089/product/view/s_${item.imgFileName}`
+                  ? `https://audimew.shop/product/view/s_${item.imgFileName}`
                   : "/images/defalt.jpg"
               }
               alt={item.productName}

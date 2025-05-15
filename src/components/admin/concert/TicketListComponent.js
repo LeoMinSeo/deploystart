@@ -22,7 +22,7 @@ const TicketListComponent = () => {
     getConcertList().then((data) => {
       setConcertData(data);
       setFilteredData(data); // 기본적으로 전체 데이터를 필터된 데이터로 설정
-      console.log(data);
+    
     });
   }, [refresh]);
 
@@ -54,12 +54,12 @@ const TicketListComponent = () => {
         alert("삭제 중 오류가 발생했습니다.");
       });
     setIsModalOpen(false); // 모달 닫기
-    console.log("삭제 요청:", cnoToDelete);
+    
   };
 
   const cancelDelete = () => {
     setIsModalOpen(false); // 모달 닫기
-    console.log("삭제 취소");
+   
   };
 
   const handleModify = (cno) => {
@@ -104,7 +104,7 @@ const TicketListComponent = () => {
                 <td className="py-2 px-4">
                   {concert.imgFileName ? (
                     <img
-                      src={`http://localhost:8089/concert/view/s_${concert.imgFileName}`}
+                      src={`https://audimew.shop/concert/view/s_${concert.imgFileName}`}
                       alt={concert.cname}
                       className="h-16 w-16 object-cover rounded"
                     />

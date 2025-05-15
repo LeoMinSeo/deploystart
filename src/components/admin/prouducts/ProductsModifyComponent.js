@@ -20,7 +20,7 @@ const ProductsModifyComponent = () => {
   useEffect(() => {
     getProductByPno(pno).then((i) => {
       setProductData(i);
-      console.log(i);
+    
       // 상품 데이터가 로드되면 폼 데이터 초기화
       setFormData({
         pname: i.pname || "",
@@ -77,7 +77,7 @@ const ProductsModifyComponent = () => {
 
     // 확인용 로그
     for (let key of submitFormData.keys()) {
-      console.log(key, submitFormData.get(key));
+  
     }
     modifyProduct(submitFormData)
       .then((i) => {
@@ -103,7 +103,7 @@ const ProductsModifyComponent = () => {
                 <div className="w-full flex justify-center mb-4">
                   <div className="relative bg-white w-80 h-80 rounded-xl overflow-hidden shadow-lg">
                     <img
-                      src={`http://localhost:8089/product/view/s_${productData.uploadFileNames[0]}`}
+                      src={`https://audimew.shop/product/view/s_${productData.uploadFileNames[0]}`}
                       alt={productData.pname}
                       className="w-full h-full object-cover"
                     />

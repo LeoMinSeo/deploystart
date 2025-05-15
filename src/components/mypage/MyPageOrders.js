@@ -157,7 +157,7 @@ const MyPageOrders = ({ orders, refreshData, uid }) => {
   };
 
   useEffect(() => {
-    console.log("받은 주문 내역:", orders);
+   
   }, [orders]);
 
   // 최신순 정렬
@@ -295,7 +295,7 @@ const MyPageOrders = ({ orders, refreshData, uid }) => {
                                   <img
                                     src={
                                       item.imgFileName
-                                        ? `http://localhost:8089/product/view/s_${item.imgFileName}`
+                                        ? `https://audimew.shop/product/view/s_${item.imgFileName}`
                                         : "/images/defalt.png"
                                     }
                                     alt={item.productName}

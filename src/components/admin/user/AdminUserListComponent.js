@@ -13,7 +13,7 @@ const AdminUserListComponent = () => {
       .then((data) => {
         setData(data);
         setFilteredData(data);
-        console.log(data);
+        
       })
       .catch((error) => {
         console.error("사용자 데이터를 가져오는 중 오류 발생:", error);

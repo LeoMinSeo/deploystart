@@ -240,7 +240,7 @@ const SignUpComponent = () => {
     }
 
     setIsSubmitting(true);
-    console.log("유저아이디" + formData.userId);
+  
     const filteredData = {
       userId: formData.userId.trim(),
       userPw: formData.userPw,

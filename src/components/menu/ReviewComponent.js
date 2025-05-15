@@ -8,13 +8,13 @@ const ReviewComponent = ({ rating, count, pno }) => {
   useEffect(() => {
     getReview(pno).then((data) => {
       setReviews(data);
-      console.log(data);
+     
     });
   }, [pno]);
 
   const renderStars = (rating) => {
     const ratingChanged = (newRating) => {
-      console.log(newRating);
+     
     };
 
     return (

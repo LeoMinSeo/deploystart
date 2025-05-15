@@ -28,7 +28,7 @@ const ListComponent = () => {
   useEffect(() => {
     getList({ page: currentPage, size: 12 }, selectedCategory)
       .then((data) => {
-        console.log(data); // data 확인
+        
         setProductData({
           dtoList: data.dtoList,
           pageRequestDTO: data.pageRequestDTO,
@@ -145,7 +145,7 @@ const ListComponent = () => {
                       src={
                         product.uploadFileNames &&
                         product.uploadFileNames.length > 0
-                          ? `http://localhost:8089/product/view/s_${product.uploadFileNames[0]}`
+                          ? `https://audimew.shop/product/view/s_${product.uploadFileNames[0]}`
                           : "/images/defalt.png"
                       }
                       alt={product.pname}

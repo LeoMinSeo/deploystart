@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://audimew.shop:8089/api/admin";
+const host = "https://audimew.shop/api/admin";
 
 // axios 인스턴스 생성 및 인터셉터 설정
 const adminApi = axios.create({
@@ -40,7 +40,7 @@ adminApi.interceptors.response.use(
         // refreshToken을 사용하여 새 accessToken 요청
         const refreshToken = localStorage.getItem("refreshToken");
         const response = await axios.post(
-          "http://audimew.shop:8089/api/auth/refresh",
+          "https://audimew.shop/api/auth/refresh",
           { refreshToken }
         );
 

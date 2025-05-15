@@ -270,7 +270,7 @@ const LoginComponent = () => {
       const loginParam = { userId, userPw };
       const response = await loginPost(loginParam);
       const { data } = response;
-      console.log(data);
+     
       if (data === "탈퇴하신분이에요") {
         setErrorMessage("존재하지 않는 계정입니다.");
       } else if (
@@ -284,14 +284,11 @@ const LoginComponent = () => {
         localStorage.setItem("isAuthenticated", "true");
         localStorage.setItem("user", JSON.stringify(data));
 
-        console.log(response.refreshToken);
-
-        console.log(data);
         navigate(from, { state: { isAuthenticated: true } });
       }
     } catch (error) {
       setErrorMessage("서버 오류가 발생했습니다.");
-      console.log(error);
+      
     }
   };
 

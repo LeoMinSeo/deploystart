@@ -30,7 +30,7 @@ const TicketModifyComponent = () => {
       .then((data) => {
         setConcertData(data);
         // 스케줄 데이터에서 scheduleId 제거하고 나머지 정보만 사용
-        console.log(data);
+       
         const schedulesWithoutId =
           data.schedulesDtoList?.map((schedule) => ({
             startTime: schedule.startTime,
@@ -50,7 +50,7 @@ const TicketModifyComponent = () => {
           uploadFileName: data.uploadFileName || "", // 이미지 파일명 저장
           schedulesDtoList: schedulesWithoutId,
         });
-        console.log(data);
+        
         setLoading(false);
       })
       .catch((error) => {
@@ -120,7 +120,7 @@ const TicketModifyComponent = () => {
       ...prev,
       schedulesDtoList: updatedSchedules,
     }));
-    console.log(updatedConcertData.schedulesDtoList);
+    
   };
 
   // 새 스케줄 추가
@@ -268,7 +268,7 @@ const TicketModifyComponent = () => {
                 <div className="w-full flex justify-center">
                   <div className="bg-white w-50 h-80 rounded-xl shadow-lg">
                     <img
-                      src={`http://localhost:8089/concert/view/s_${updatedConcertData.uploadFileName}`}
+                      src={`https://audimew.shop/concert/view/s_${updatedConcertData.uploadFileName}`}
                       alt="현재 공연 이미지"
                       className="w-full h-full object-contain"
                     />

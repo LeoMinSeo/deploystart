@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = `http://audimew.shop:8089/api/member`;
+const host = `https://audimew.shop/api/member`;
 
 // 회원 API를 위한 axios 인스턴스 생성
 const memberApi = axios.create({
@@ -61,9 +61,9 @@ memberApi.interceptors.response.use(
       try {
         // refreshToken을 사용하여 새 accessToken 요청
         const refreshToken = localStorage.getItem("refreshToken");
-        console.log("여기로옴?", refreshToken);
+      
         const response = await axios.post(
-          "http://audimew.shop:8089/api/auth/refresh",
+          "https://audimew.shop/api/auth/refresh",
           { refreshToken }
         );
 
@@ -103,20 +103,20 @@ const getHeaders = () => {
 // 회원가입
 export const registerUser = async (formData) => {
   const response = await memberApi.post(`/register`, formData);
-  console.log("회원가입 성공:", response.data);
+  
   return response.data;
 };
 
 // 아이디 중복 확인
 export const checkId = async (userId) => {
   const response = await memberApi.post(`/checkUserId`, { userId });
-  console.log("아이디 중복 확인 성공: ", response.data);
+  
   return response.data;
 };
 
 // 로그인
 export const loginPost = async (loginParam) => {
-  console.log("loginParam: ", loginParam);
+ 
   const res = await memberApi.post(`/login`, {
     userId: loginParam.userId,
     userPw: loginParam.userPw,
@@ -133,7 +133,7 @@ export const findID = async (userName, userEmail) => {
 // 비밀번호 찾기
 export const findPw = async (userName, userId) => {
   const res = await memberApi.post(`/findPw`, { userName, userId });
-  console.log("비밀번호 찾기 성공", res.data);
+  
   return res.data;
 };
 
@@ -154,14 +154,14 @@ export const updateProfile = async (userId, formData) => {
 // 주문 내역 불러오기
 export const ordersResponse = async (id) => {
   const res = await memberApi.get(`/orders/${id}`);
-  console.log("주문 내역 불러오기 성공:", res.data);
+  
   return res.data;
 };
 
 // 리뷰 불러오기
 export const productReview = async (id) => {
   const res = await memberApi.get(`/review/${id}`);
-  console.log("리뷰 불러오기 성공: ", res.data);
+ 
   return res.data;
 };
 
@@ -176,14 +176,14 @@ export const deleteUser = async (userId, password) => {
 // 예약 내역 조회 0409
 export const getReservation = async (id) => {
   const res = await memberApi.get(`/reservation/${id}`);
-  console.log(("예약 내역 잘 불러왔나요???", res.data));
+  
   return res.data;
 };
 
 //내 리뷰 삭제 0410
 export const deleteReview = async (previewNo) => {
   const res = await memberApi.delete(`delete/review/${previewNo}`);
-  console.log("리뷰 삭제 잘 됐나요?", res.data);
+  
   return res.data;
 };
 

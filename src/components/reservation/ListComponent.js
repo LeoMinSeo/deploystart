@@ -52,7 +52,7 @@ const ListComponent = () => {
     getList(pageRequestDTO, selectedCategory)
       .then((data) => {
         setConcertData(data);
-        console.log(data.dtoList);
+      
       })
       .catch((error) => {
         console.error("공연 목록 불러오기 실패:", error);
@@ -136,7 +136,7 @@ const ListComponent = () => {
                     src={
                       concert.uploadFileName === null
                         ? "/images/defalt.png"
-                        : `http://localhost:8089/concert/view/${concert.uploadFileName}`
+                        : `https://audimew.shop/concert/view/${concert.uploadFileName}`
                     }
                     alt={concert.cname}
                     className="w-full h-full object-fill group-hover:scale-105 transition-all duration-300"

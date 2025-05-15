@@ -49,7 +49,7 @@ const ReadComponent = () => {
   useEffect(() => {
     getConcertByCno(cno).then((i) => {
       setPerformance(i);
-      console.log(i);
+   
 
       // 공연 기간 계산
       if (i.schedulesDtoList && i.schedulesDtoList.length > 0) {
@@ -399,7 +399,7 @@ const ReadComponent = () => {
                     src={
                       !performance.uploadFileName
                         ? "/images/defalt.png"
-                        : `http://localhost:8089/concert/view/${performance.uploadFileName}`
+                        : `https://audimew.shop/concert/view/${performance.uploadFileName}`
                     }
                     alt={performance.cname}
                     className="w-full h-auto"

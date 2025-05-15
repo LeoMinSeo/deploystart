@@ -20,7 +20,7 @@ const ProductsAddComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    
 
     const formDataToSend = new FormData();
     formDataToSend.append("pname", formData.pname);

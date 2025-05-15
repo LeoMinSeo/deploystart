@@ -13,7 +13,7 @@ const ProductRefundListComponent = () => {
     getProductRefundList().then((data) => {
       setRefundList(data);
       setFilteredList(data); // 기본적으로 전체 데이터를 필터된 데이터로 설정
-      console.log(data);
+     
     });
   }, [refresh]);
 

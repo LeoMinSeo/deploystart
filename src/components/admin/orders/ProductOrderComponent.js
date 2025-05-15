@@ -12,7 +12,7 @@ const ProductOrderComponent = () => {
     getProductOrderList().then((data) => {
       setOrderList(data);
       setFilteredOrders(data);
-      console.log(data);
+      
     });
   }, []);
 

@@ -175,7 +175,7 @@ min-w-[450px] max-w-sm w-[2%] h-[calc(100vh-154px)] overflow-y-auto"
                 <img
                   src={
                     newProfileImage ||
-                    `http://localhost:8089/api/member/profile-image/${
+                    `http://audimew.shop/api/member/profile-image/${
                       userData.profileImagePath
                     }?t=${new Date().getTime()}`
                   }

@@ -32,7 +32,7 @@ const ReadComponent = () => {
     getOne(pno).then((data) => {
       setProduct(data);
       setFetching(false);
-      console.log(data);
+      
     });
   }, [pno]);
 
@@ -132,7 +132,7 @@ const ReadComponent = () => {
             <img
               src={
                 product.productDTO.uploadFileNames.length > 0
-                  ? `http://localhost:8089/product/view/${product.productDTO.uploadFileNames[0]}`
+                  ? `https://audimew.shop/product/view/${product.productDTO.uploadFileNames[0]}`
                   : "/images/defalt.jpg"
               }
               alt="상품 이미지"

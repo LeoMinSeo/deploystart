@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://audimew.shop:8089/api/product";
+const host = "https://audimew.shop/api/product";
 
 export const getList = async (pageParam, category) => {
   const res = await axios.get(`${host}/list/${category}`, {
@@ -10,7 +10,7 @@ export const getList = async (pageParam, category) => {
 };
 
 export const getOne = async (pno) => {
-  console.log(pno);
+  
   const res = await axios.get(`${host}/read/${pno.pno}`);
   return res.data;
 };

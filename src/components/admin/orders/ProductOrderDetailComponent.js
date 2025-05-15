@@ -27,7 +27,7 @@ const ProductOrderDetailComponent = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        
         setIsLoading(false);
       });
   }, [orderNum]);
@@ -51,7 +51,7 @@ const ProductOrderDetailComponent = () => {
       orderNum: parseInt(orderNum),
       trackingNumber: trackingNumber,
     };
-    console.log("백엔드로 보낼 데이터:", updateData);
+    
     setIsUpdating(true);
     modifyProductOrder(updateData)
       .then((response) => {

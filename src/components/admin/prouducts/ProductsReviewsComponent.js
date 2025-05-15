@@ -17,7 +17,7 @@ const ProductsReviewsComponent = () => {
     getReviewList(pno)
       .then((response) => {
         setData(response);
-        console.log(response);
+      
       })
       .catch((error) => {
         console.error("리뷰 데이터 로딩 실패:", error);

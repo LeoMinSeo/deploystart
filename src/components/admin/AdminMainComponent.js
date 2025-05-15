@@ -15,11 +15,11 @@ const AdminMainComponent = () => {
     getSalesData(selectedYear)
       .then((data) => {
         setSalesData(data);
-        console.log("받아온 판매 데이터:", data);
+       
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching sales data:", error);
+        
         setIsLoading(false);
       });
   }, [selectedYear]);

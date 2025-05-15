@@ -6,13 +6,13 @@ const MyPageReservation = ({ reservation, refreshData, uid }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const reservationsPerPage = 2;
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const [cancelingTickets, setCancelingTickets] = useState([]);
+ 
 
   // 취소 모달 상태 관리
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log("받은 예약 내역:", reservation);
+
   }, [reservation]);
 
   // 예매번호 포맷 함수
@@ -259,7 +259,7 @@ const MyPageReservation = ({ reservation, refreshData, uid }) => {
                               {item.posterImageUrl ? (
                                 // 이미지가 있을 경우
                                 <img
-                                  src={`http://localhost:8089/concert/view/s_${item.posterImageUrl}`}
+                                  src={`https://audimew.shop/concert/view/s_${item.posterImageUrl}`}
                                   alt="Concert Poster"
                                   className="w-full h-full object-cover rounded-lg"
                                 />

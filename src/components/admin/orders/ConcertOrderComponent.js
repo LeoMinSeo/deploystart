@@ -12,7 +12,7 @@ const ConcertOrderComponent = () => {
     getConcertTicketList().then((data) => {
       setTicketList(data);
       setFilteredTickets(data);
-      console.log(data);
+      
     });
   }, []);
 

@@ -17,7 +17,7 @@ const ProductsListComponent = () => {
     getProductList().then((data) => {
       setProducts(data);
       setFilteredData(data);
-      console.log(data);
+     
     });
   }, [refresh]);
   useEffect(() => {
@@ -47,12 +47,12 @@ const ProductsListComponent = () => {
         alert("삭제 중 오류가 발생했습니다.");
       });
     setIsModalOpen(false); // 모달 닫기
-    console.log("삭제 요청:", productToDelete);
+    
   };
 
   const cancelDelete = () => {
     setIsModalOpen(false); // 모달 닫기
-    console.log("삭제 취소");
+    
   };
 
   const handleModify = (pno) => {
@@ -94,7 +94,7 @@ const ProductsListComponent = () => {
                 <td className="py-2 px-4">
                   {product.imgFileName ? (
                     <img
-                      src={`http://localhost:8089/product/view/s_${product.imgFileName}`}
+                      src={`https://audimew.shop/product/view/s_${product.imgFileName}`}
                       alt={product.pname}
                       className="h-16 w-16 object-cover rounded"
                     />

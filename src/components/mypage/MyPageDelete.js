@@ -4,7 +4,7 @@ import { deleteUser } from "../../api/memberApi";
 import { useNavigate } from "react-router-dom";
 
 const MyPageDelete = ({ userId }) => {
-  console.log("userId:", userId);
+ 
   const [selectedReasons, setSelectedReasons] = useState([]);
   const [password, setPassword] = useState("");
   const [showModal, setShowModal] = useState(false);

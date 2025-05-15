@@ -31,14 +31,14 @@ const MyPageComponent = ({ userId, data }) => {
         setUserData(data);
       })
       .catch((error) => {
-        console.log("사용자정보불러오기 에러");
+        
       });
     ordersResponse(loginUser.uid)
       .then((data) => {
         setOrders(data);
       })
       .catch((error) => {
-        console.log("주문내역불러오기 에러");
+      
       });
 
     getReservation(loginUser.uid)
@@ -46,7 +46,7 @@ const MyPageComponent = ({ userId, data }) => {
         setReservation(data);
       })
       .catch((error) => {
-        console.log("예약내역 불러오기 에러!!");
+        
       });
 
     getPointList(loginUser.uid)
@@ -56,7 +56,7 @@ const MyPageComponent = ({ userId, data }) => {
         setTotalPoint(total);
       })
       .catch((error) => {
-        console.log("포인트 내역 불러오기 에러!!");
+      
       });
 
     productReview(loginUser.uid)
@@ -64,7 +64,7 @@ const MyPageComponent = ({ userId, data }) => {
         setReviews(data || []);
       })
       .catch((error) => {
-        console.log("리뷰불러오기 에러");
+        
       });
   }, [userId, refreshTrigger]);
 

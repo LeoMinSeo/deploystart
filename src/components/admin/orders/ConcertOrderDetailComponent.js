@@ -18,10 +18,10 @@ const ConcertOrderDetailComponent = () => {
         setNewStatus(res.status || "RESERVATION");
         setTrackingNumber(res.trackingNumber || "");
         setLoading(false);
-        console.log(res);
+        
       })
       .catch((err) => {
-        console.log(err);
+       
         setLoading(false);
       });
   }, [ticketNum]);
@@ -96,14 +96,14 @@ const ConcertOrderDetailComponent = () => {
       trackingNumber:
         ticketDetail.deliveryMethod === "mail" ? trackingNumber : null,
     };
-    console.log("업데이트할 데이터:", updateData);
+    
     modifyConcertTicket(updateData)
       .then((data) => {
         alert(data);
         navigate(-1);
       })
       .catch((err) => {
-        console.log("에러", err);
+        
         alert("공연정보 업데이트중 오류");
       });
 

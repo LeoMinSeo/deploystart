@@ -12,7 +12,7 @@ function FindpwComponent() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `http://audimew.shop:8089/api/user/send-reset-link`,
+        `https://audimew.shop/api/user/send-reset-link`,
         {
           userId: id,
           userEmail: email,

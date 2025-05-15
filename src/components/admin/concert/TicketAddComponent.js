@@ -77,7 +77,7 @@ const TicketAddComponent = () => {
         ...updatedSchedules[index],
         [field]: value,
       };
-      console.log(updatedSchedules);
+      
       return {
         ...prev,
         schedulesDtoList: updatedSchedules,
