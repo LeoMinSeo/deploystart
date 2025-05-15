@@ -268,7 +268,7 @@ const TicketModifyComponent = () => {
                 <div className="w-full flex justify-center">
                   <div className="bg-white w-50 h-80 rounded-xl shadow-lg">
                     <img
-                      src={`https://audimew.shop/concert/view/s_${updatedConcertData.uploadFileName}`}
+                      src={`https://audimew.shop/api/concert/view/s_${updatedConcertData.uploadFileName}`}
                       alt="현재 공연 이미지"
                       className="w-full h-full object-contain"
                     />

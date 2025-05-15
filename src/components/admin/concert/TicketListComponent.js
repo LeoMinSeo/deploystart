@@ -104,7 +104,7 @@ const TicketListComponent = () => {
                 <td className="py-2 px-4">
                   {concert.imgFileName ? (
                     <img
-                      src={`https://audimew.shop/concert/view/s_${concert.imgFileName}`}
+                      src={`https://audimew.shop/api/concert/view/s_${concert.imgFileName}`}
                       alt={concert.cname}
                       className="h-16 w-16 object-cover rounded"
                     />

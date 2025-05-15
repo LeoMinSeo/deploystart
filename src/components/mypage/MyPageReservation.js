@@ -259,7 +259,7 @@ const MyPageReservation = ({ reservation, refreshData, uid }) => {
                               {item.posterImageUrl ? (
                                 // 이미지가 있을 경우
                                 <img
-                                  src={`https://audimew.shop/concert/view/s_${item.posterImageUrl}`}
+                                  src={`https://audimew.shop/api/concert/view/s_${item.posterImageUrl}`}
                                   alt="Concert Poster"
                                   className="w-full h-full object-cover rounded-lg"
                                 />

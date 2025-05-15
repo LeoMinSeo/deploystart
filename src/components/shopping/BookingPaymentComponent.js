@@ -38,7 +38,6 @@ const BookingPaymentComponent = () => {
       setLoading(true);
       getConcertByCnoAndDate(cno, selectedSchedule.startTime)
         .then((data) => {
-         
           setConcertData(data);
           // 단가 설정
           const price = data.concertDTO.cprice
@@ -188,7 +187,7 @@ const BookingPaymentComponent = () => {
       alert("결제 수단을 선택해주세요.");
       return;
     }
-  
+
     const imp = window.IMP; // 아이엠포트 객체
 
     imp.init("imp82633673");
@@ -417,7 +416,7 @@ const BookingPaymentComponent = () => {
                       src={
                         !concertData.concertDTO.uploadFileName
                           ? "/images/defalt.png"
-                          : `http://audimew.shop/concert/view/s_${concertData.concertDTO.uploadFileName}`
+                          : `http://audimew.shop/api/concert/view/s_${concertData.concertDTO.uploadFileName}`
                       }
                       alt={concertData.concertDTO.cname}
                       className="w-full h-auto rounded"

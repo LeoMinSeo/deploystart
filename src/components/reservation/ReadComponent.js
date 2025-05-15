@@ -399,7 +399,7 @@ const ReadComponent = () => {
                     src={
                       !performance.uploadFileName
                         ? "/images/defalt.png"
-                        : `https://audimew.shop/concert/view/${performance.uploadFileName}`
+                        : `https://audimew.shop/api/concert/view/${performance.uploadFileName}`
                     }
                     alt={performance.cname}
                     className="w-full h-auto"

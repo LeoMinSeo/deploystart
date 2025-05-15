@@ -136,7 +136,7 @@ const ListComponent = () => {
                     src={
                       concert.uploadFileName === null
                         ? "/images/defalt.png"
-                        : `https://audimew.shop/concert/view/${concert.uploadFileName}`
+                        : `https://audimew.shop/api/concert/view/${concert.uploadFileName}`
                     }
                     alt={concert.cname}
                     className="w-full h-full object-fill group-hover:scale-105 transition-all duration-300"
