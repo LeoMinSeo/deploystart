@@ -94,7 +94,7 @@ const ProductsListComponent = () => {
                 <td className="py-2 px-4">
                   {product.imgFileName ? (
                     <img
-                      src={`https://audimew.shop/product/view/s_${product.imgFileName}`}
+                      src={`https://audimew.shop/api/product/view/s_${product.imgFileName}`}
                       alt={product.pname}
                       className="h-16 w-16 object-cover rounded"
                     />

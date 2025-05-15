@@ -146,7 +146,7 @@ const ProductDetailComponent = () => {
               <img
                 src={
                   refundDetail.productImgFileName
-                    ? `https://audimew.shop/product/view/${refundDetail.productImgFileName}`
+                    ? `https://audimew.shop/api/product/view/${refundDetail.productImgFileName}`
                     : "/images/defalt.png"
                 }
                 alt={refundDetail.pname}

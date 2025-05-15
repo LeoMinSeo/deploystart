@@ -132,7 +132,7 @@ const ReadComponent = () => {
             <img
               src={
                 product.productDTO.uploadFileNames.length > 0
-                  ? `https://audimew.shop/product/view/${product.productDTO.uploadFileNames[0]}`
+                  ? `https://audimew.shop/api/product/view/${product.productDTO.uploadFileNames[0]}`
                   : "/images/defalt.jpg"
               }
               alt="상품 이미지"

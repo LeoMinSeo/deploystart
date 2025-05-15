@@ -145,7 +145,7 @@ const ListComponent = () => {
                       src={
                         product.uploadFileNames &&
                         product.uploadFileNames.length > 0
-                          ? `https://audimew.shop/product/view/s_${product.uploadFileNames[0]}`
+                          ? `https://audimew.shop/api/product/view/s_${product.uploadFileNames[0]}`
                           : "/images/defalt.png"
                       }
                       alt={product.pname}

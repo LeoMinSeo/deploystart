@@ -103,7 +103,7 @@ const ProductsModifyComponent = () => {
                 <div className="w-full flex justify-center mb-4">
                   <div className="relative bg-white w-80 h-80 rounded-xl overflow-hidden shadow-lg">
                     <img
-                      src={`https://audimew.shop/product/view/s_${productData.uploadFileNames[0]}`}
+                      src={`https://audimew.shop/api/product/view/s_${productData.uploadFileNames[0]}`}
                       alt={productData.pname}
                       className="w-full h-full object-cover"
                     />

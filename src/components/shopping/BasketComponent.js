@@ -107,7 +107,7 @@ const BasketComponent = () => {
                   <img
                     src={
                       item.productDTO.uploadFileNames.length > 0
-                        ? `https://audimew.shop/product/view/s_${item.productDTO.uploadFileNames[0]}`
+                        ? `https://audimew.shop/api/product/view/s_${item.productDTO.uploadFileNames[0]}`
                         : "/images/defalt.png"
                     }
                     alt={item.productDTO.pname}

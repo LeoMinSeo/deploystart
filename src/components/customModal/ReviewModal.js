@@ -54,7 +54,7 @@ const ReviewModal = ({ isOpen, onClose, item, onSuccess }) => {
             <img
               src={
                 item.imgFileName
-                  ? `https://audimew.shop/product/view/s_${item.imgFileName}`
+                  ? `https://audimew.shop/api/product/view/s_${item.imgFileName}`
                   : "/images/defalt.jpg"
               }
               alt={item.productName}

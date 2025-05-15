@@ -295,7 +295,7 @@ const MyPageOrders = ({ orders, refreshData, uid }) => {
                                   <img
                                     src={
                                       item.imgFileName
-                                        ? `https://audimew.shop/product/view/s_${item.imgFileName}`
+                                        ? `https://audimew.shop/api/product/view/s_${item.imgFileName}`
                                         : "/images/defalt.png"
                                     }
                                     alt={item.productName}
