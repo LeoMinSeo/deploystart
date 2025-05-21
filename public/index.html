@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AudiMew</title>
     <script
       type="text/javascript"
-      src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=21455191bf1fd506adb13b016452d000&libraries=services"
+      src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAO_MAP_API_KEY%&libraries=services"
     ></script>
     <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
     <script>
@@ -42,9 +41,8 @@
           w.addEventListener("load", l);
         }
       })();
-
       ChannelIO("boot", {
-        pluginKey: "bae99f3a-b6f9-42c6-9ead-e31f33b6d198",
+        pluginKey: "%REACT_APP_CHANNEL_IO_PLUGIN_KEY%",
       });
     </script>
   </head>

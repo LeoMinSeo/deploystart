@@ -171,7 +171,7 @@ const PaymentComponent = () => {
 
     // 아임포트 결제 모듈 초기화
     const imp = window.IMP;
-    imp.init("imp82633673"); // 가맹점 ID
+    imp.init("%REACT_APP_IMP_MERCHANT_ID%"); // 가맹점 ID
 
     imp.request_pay(
       {
