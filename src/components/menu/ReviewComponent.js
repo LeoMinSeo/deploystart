@@ -33,8 +33,8 @@ const ReviewComponent = ({ rating, count, pno }) => {
   };
 
   return (
-    <section className="bg-white p-6 border border-[#ad9e87] border-opacity-30 rounded-lg mt-6 w-2/3 mx-auto">
-      <h3 className="text-xl font-bold text-gray-800 border-b pb-2">
+    <section className="bg-white p-4 sm:p-6 border border-[#ad9e87] border-opacity-30 rounded-lg mt-5 mb-20 lg:mb-6 w-full lg:w-2/3 lg:mx-auto shadow-sm">
+      <h3 className="text-lg sm:text-xl font-bold text-gray-800 border-b pb-2">
         상품리뷰
       </h3>
       <div className="mt-2 flex items-center">
@@ -48,13 +48,13 @@ const ReviewComponent = ({ rating, count, pno }) => {
           reviews.map((review) => (
             <div
               key={review.preivewNo}
-              className="bg-gray-100 p-4 rounded-lg shadow-sm border flex items-start space-x-3"
+              className="bg-gray-100 p-3 sm:p-4 rounded-lg shadow-sm border flex items-start space-x-3"
             >
               <div className="flex-1">
                 <p className="font-semibold text-gray-800 text-sm">
                   {review.userId}
                 </p>
-                <p className="text-gray-600 text-sm mt-1">
+                <p className="text-gray-600 text-sm mt-1 leading-relaxed">
                   {review.reviewtext}
                 </p>
                 <div className="mt-1">{renderStars(review.reviewRating)}</div>

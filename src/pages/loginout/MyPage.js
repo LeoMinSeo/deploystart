@@ -16,8 +16,8 @@ const MyPage = () => {
   const [userData, setUserData] = useState({});
   const [newProfileImage, setNewProfileImage] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const fetchUserData = async () => {
@@ -137,13 +137,127 @@ const MyPage = () => {
     },
   ];
 
+  // 현재 선택된 메뉴 찾기
+  const getCurrentMenuLabel = () => {
+    for (const category of sidebar) {
+      for (const item of category.items) {
+        if (item.id === data) {
+          return item.label;
+        }
+      }
+    }
+    return "메뉴 선택";
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <MainMenubar />
-      <div className="flex bg-gray-100">
+      
+      {/* 모바일 마이페이지 헤더 - lg 미만에서만 표시 */}
+      <div className="lg:hidden relative">
+        <div className="bg-white shadow-sm border-b border-gray-200 mt-16 sm:mt-18 md:mt-20 sticky top-16 sm:top-18 md:top-20 z-30">
+          <div className="px-4 py-2">
+            {/* 마이페이지 제목 */}
+            <h1 className="text-lg font-bold text-gray-800 mb-2">마이페이지</h1>
+            
+            {/* 프로필 정보와 햄버거 버튼 */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  {!userData.profileImagePath ? (
+                    <div 
+                      className="w-10 h-10 rounded-full bg-gray-100 border border-gray-200 flex items-center justify-center cursor-pointer"
+                      onClick={handleImageClick}
+                    >
+                      <svg className="w-5 h-5 text-gray-400" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="35" r="18" fill="currentColor" />
+                        <path d="M25 90 L25 75 C25 55 75 55 75 75 L75 90 Z" fill="currentColor" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <img
+                      src={
+                        newProfileImage ||
+                        `http://audimew.shop/api/member/profile-image/${
+                          userData.profileImagePath
+                        }?t=${new Date().getTime()}`
+                      }
+                      alt="프로필 사진"
+                      className="w-10 h-10 rounded-full object-cover border border-gray-200 cursor-pointer"
+                      onClick={handleImageClick}
+                    />
+                  )}
+                  {loading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+                      <div className="animate-spin rounded-full h-3 w-3 border-t border-b border-white"></div>
+                    </div>
+                  )}
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-medium text-gray-800 truncate max-w-[120px]">
+                    {userData.userName}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate max-w-[120px]">
+                    {userData.userEmail}
+                  </p>
+                </div>
+              </div>
+              
+              {/* 햄버거 메뉴 버튼 - 오른쪽에 작게 */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="bg-orange-500 hover:bg-orange-600 text-white rounded-md px-3 py-1.5 text-xs font-medium transition-colors duration-200 flex items-center space-x-1"
+              >
+                <span>{getCurrentMenuLabel()}</span>
+                <svg
+                  className={`w-3 h-3 transition-transform duration-200 ${
+                    isMobileMenuOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* 모바일 드롭다운 메뉴 - 전체 가로 길이로 */}
+        {isMobileMenuOpen && (
+          <div className="absolute top-full left-0 right-0 bg-white shadow-lg border-t border-gray-200 z-30">
+            <div className="max-h-48 overflow-y-auto">
+              {sidebar.map((category, categoryIndex) => (
+                <div key={category.id}>
+                  {category.items.map((item) => (
+                    <button
+                      key={item.id}
+                      className={`w-full text-left px-4 py-2 text-sm transition-colors duration-150 border-b border-gray-100 last:border-b-0 ${
+                        data === item.id
+                          ? "bg-orange-500 text-white"
+                          : "text-gray-700 hover:bg-gray-50"
+                      }`}
+                      onClick={() => {
+                        setData(item.id);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="flex bg-gray-100 relative">
+        {/* 데스크톱 사이드바 - 800px 고정 높이 */}
         <aside
-          className="fixed top-[120px] left-[2%] transition-all duration-1000 ease-in-out bg-white shadow-xl rounded-xl p-6 z-40 flex-shrink-0 
-min-w-[450px] max-w-sm w-[2%] h-[calc(100vh-154px)] overflow-y-auto"
+          className="hidden lg:block absolute top-[120px] left-[2%] transition-all duration-1000 ease-in-out bg-white shadow-xl rounded-xl p-6 z-20 flex-shrink-0 
+min-w-[450px] max-w-sm w-[2%] h-[800px]"
         >
           {/* 마이페이지 타이틀 */}
           <h2 className="text-3xl font-bold  mb-4 select-none text-center">
@@ -196,7 +310,6 @@ min-w-[450px] max-w-sm w-[2%] h-[calc(100vh-154px)] overflow-y-auto"
               <h3 className="text-xl font-medium text-gray-800 mb-1">
                 {userData.userName}
               </h3>
-              {/* <p className="text-sm text-gray-600 mb-1">{userData.userId}</p> */}
               <p className="text-sm text-gray-500 overflow-hidden text-ellipsis">
                 {userData.userEmail}
               </p>
@@ -255,8 +368,8 @@ min-w-[450px] max-w-sm w-[2%] h-[calc(100vh-154px)] overflow-y-auto"
           </nav>
         </aside>
 
-        {/* 메인 콘텐츠 */}
-        <main className="ml-[20%] lg:ml-[25%] flex-grow bg-gray-100 p-8 min-h-screen">
+        {/* 메인 콘텐츠 - 고정값 기준 */}
+        <main className="w-full lg:ml-[480px] lg:mr-[3vw] flex-grow bg-gray-100 px-0 py-0 lg:p-8 min-h-screen lg:mt-0 -mt-1">
           <MyPageComponent data={data} userId={userId} />
         </main>
       </div>

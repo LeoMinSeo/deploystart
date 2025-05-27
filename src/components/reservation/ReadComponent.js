@@ -380,7 +380,7 @@ const ReadComponent = () => {
     <div className="bg-gray-50 min-h-screen">
       <MainMenubar currentPage={`/reservation/read/${cno}`} />
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-6xl mx-auto px-4 py-8 mt-16 sm:mt-18 md:mt-20 lg:mt-[10vh]">
         {/* 공연 정보 영역 */}
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
           {/* 공연 제목 */}

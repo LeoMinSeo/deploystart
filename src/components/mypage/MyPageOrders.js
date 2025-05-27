@@ -199,8 +199,8 @@ const MyPageOrders = ({ orders, refreshData, uid }) => {
 
   return (
     // <div className="flex justify-end ml-20 h-auto select-none">
-    <div className="flex justify-end ml-[1rem] mt-[0.5rem] min-h-[85vh] select-none">
-      <div className="bg-white p-8 rounded-lg shadow-lg mt-20 w-full max-w-full">
+    <div className="flex justify-end ml-0 lg:ml-[1rem] mt-0 lg:mt-[0.5rem] min-h-[85vh] select-none">
+      <div className="bg-white p-4 lg:p-8 rounded-lg shadow-lg  lg:mt-20 w-full max-w-full">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b pb-4 select-none border-gray-200">
           주문 내역
         </h2>

@@ -14,6 +14,7 @@ const MainMenubar = ({ currentIndex, currentPage }) => {
   }
 
   const [user, setUser] = useState(loginUser);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -55,157 +56,298 @@ const MainMenubar = ({ currentIndex, currentPage }) => {
   };
 
   return (
-    <div
-      className={`absolute top-0 left-0 w-full h-[10vh] z-50 flex items-center px-5 transition-all duration-500 ${
-        currentIndex === 0
-          ? "bg-transparent"
-          : currentIndex === 3
-          ? "bg-white"
-          : "bg-[#f1efeb]"
-      }`}
-    >
-      <div className="ml-4">
-        <Link
-          to={"/"}
-          className={`${
-            currentIndex === 0
-              ? "text-[#EED9C4] font-bold"
-              : "text-black font-bold"
-          }`}
-        >
-          <img
-            src={`${
+    <>
+      {/* 데스크톱 메뉴바 */}
+      <div
+        className={`absolute top-0 left-0 w-full h-16 sm:h-18 md:h-20 lg:h-[10vh] z-50 flex items-center px-3 sm:px-5 transition-all duration-500 ${
+          currentIndex === 0
+            ? "bg-transparent"
+            : currentIndex === 3
+            ? "bg-white"
+            : "bg-[#f1efeb]"
+        }`}
+      >
+        {/* 로고 */}
+        <div className="flex-shrink-0">
+          <Link
+            to={"/"}
+            className={`${
               currentIndex === 0
-                ? "/images/1stpageLogo.png"
-                : "/images/mainlogo.png"
+                ? "text-[#EED9C4] font-bold"
+                : "text-black font-bold"
             }`}
-            className={`${currentIndex === 0 ? "w-32" : "w-20"}`}
-          ></img>
-        </Link>
-      </div>
-      <div className="mr-3 ml-4">
-        <Link
-          to={{ pathname: "/product", state: loginUser }}
-          className={`${
-            currentIndex === 0
-              ? "text-[#EED9C4] font-bold"
-              : "text-black font-bold"
-          }`}
-        >
-          product shop
-        </Link>
-      </div>
-      <div>
-        <Link
-          to={{ pathname: "/reservation", state: loginUser }}
-          className={`${
-            currentIndex === 0
-              ? "text-[#EED9C4] font-bold"
-              : "text-black font-bold"
-          }`}
-        >
-          reservation
-        </Link>
-      </div>
-
-      <div className="flex items-center ml-auto mr-5">
-        {loginUser ? (
-          <>
-            {/* 로그인된 상태에서 admin일 경우 관리자 페이지 버튼, 아니면 MyPage 링크 표시 */}
-            <button
-              onClick={handleLogout}
-              className={`${
+          >
+            <img
+              src={`${
                 currentIndex === 0
-                  ? "text-[#EED9C4] font-bold"
-                  : "text-black font-bold"
-              } mx-2 relative after:content-['|'] after:absolute after:right-[-12px] after:text-gray-700`}
-            >
-              LogOut
-            </button>
+                  ? "/images/1stpageLogo.png"
+                  : "/images/mainlogo.png"
+              }`}
+              className={`${
+                currentIndex === 0 
+                  ? "w-20 sm:w-24 md:w-28 lg:w-32" 
+                  : "w-12 sm:w-16 md:w-18 lg:w-20"
+              }`}
+              alt="logo"
+            />
+          </Link>
+        </div>
 
-            {loginUser.userId === "admin" ? (
-              // admin일 경우 관리자 페이지 버튼만 표시하고, Cart 버튼은 표시하지 않음
+        {/* 데스크톱 네비게이션 - lg 이상에서만 표시 */}
+        <div className="hidden lg:flex lg:items-center lg:ml-4 lg:space-x-6">
+          <Link
+            to={{ pathname: "/product", state: loginUser }}
+            className={`${
+              currentIndex === 0
+                ? "text-[#EED9C4] font-bold"
+                : "text-black font-bold"
+            } whitespace-nowrap`}
+          >
+            product shop
+          </Link>
+          <Link
+            to={{ pathname: "/reservation", state: loginUser }}
+            className={`${
+              currentIndex === 0
+                ? "text-[#EED9C4] font-bold"
+                : "text-black font-bold"
+            } whitespace-nowrap`}
+          >
+            reservation
+          </Link>
+        </div>
+
+        {/* 햄버거 메뉴 버튼 - lg 미만에서만 표시 */}
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`lg:hidden ml-auto mr-4 p-2 ${
+            currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+          }`}
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        {/* 데스크톱 사용자 메뉴 - lg 이상에서만 표시 */}
+        <div className="hidden lg:flex lg:items-center lg:ml-auto lg:mr-5 lg:space-x-4">
+          {loginUser ? (
+            <>
               <button
-                onClick={handleAdmin}
+                onClick={handleLogout}
                 className={`${
                   currentIndex === 0
                     ? "text-[#EED9C4] font-bold"
                     : "text-black font-bold"
-                } mx-2`}
+                } whitespace-nowrap`}
               >
-                Administrator
+                LogOut
               </button>
-            ) : (
-              // admin이 아닌 경우 MyPage 링크 표시
-              <Link
-                to={`/member/mypage/${loginUser.userId}`}
+
+              {loginUser.userId === "admin" ? (
+                <button
+                  onClick={handleAdmin}
+                  className={`${
+                    currentIndex === 0
+                      ? "text-[#EED9C4] font-bold"
+                      : "text-black font-bold"
+                  } whitespace-nowrap`}
+                >
+                  Administrator
+                </button>
+              ) : (
+                <Link
+                  to={`/member/mypage/${loginUser.userId}`}
+                  className={`${
+                    currentIndex === 0
+                      ? "text-[#EED9C4] font-bold"
+                      : "text-black font-bold"
+                  } whitespace-nowrap`}
+                >
+                  MyPage
+                </Link>
+              )}
+
+              {loginUser.userId !== "admin" && (
+                <button
+                  onClick={handleBasketPage}
+                  className={`${
+                    currentIndex === 0
+                      ? "text-[#EED9C4] font-bold"
+                      : "text-black font-bold"
+                  } whitespace-nowrap`}
+                >
+                  Cart
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  navigate("/member/login", {
+                    state: { from: location.pathname },
+                  });
+                }}
                 className={`${
                   currentIndex === 0
                     ? "text-[#EED9C4] font-bold"
                     : "text-black font-bold"
-                } mx-2 relative after:content-['|'] after:absolute after:right-[-12px] after:text-gray-700`}
+                } whitespace-nowrap`}
+              >
+                Login
+              </button>
+              <button
+                onClick={handleMyPage}
+                className={`${
+                  currentIndex === 0
+                    ? "text-[#EED9C4] font-bold"
+                    : "text-black font-bold"
+                } whitespace-nowrap`}
               >
                 MyPage
-              </Link>
-            )}
-
-            {/* admin이 아닌 경우에만 Cart 버튼 표시 */}
-            {loginUser.userId !== "admin" && (
+              </button>
               <button
                 onClick={handleBasketPage}
                 className={`${
                   currentIndex === 0
                     ? "text-[#EED9C4] font-bold"
                     : "text-black font-bold"
-                } mx-2`}
+                } whitespace-nowrap`}
               >
                 Cart
               </button>
-            )}
-          </>
-        ) : (
-          <>
-            {/* 로그인되지 않은 상태에서는 Login, Join, MyPage, Cart 버튼 표시 */}
-            <button
-              onClick={() => {
-                navigate("/member/login", {
-                  state: { from: location.pathname },
-                });
-              }}
-              className={`${
-                currentIndex === 0
-                  ? "text-[#EED9C4] font-bold"
-                  : "text-black font-bold"
-              } mx-2 relative after:content-['|'] after:absolute after:right-[-12px] after:text-gray-700`}
-            >
-              Login
-            </button>
-
-            {/* 로그인되지 않았을 때는 MyPage와 Cart 버튼도 표시 */}
-            <button
-              onClick={handleMyPage}
-              className={`${
-                currentIndex === 0
-                  ? "text-[#EED9C4] font-bold"
-                  : "text-black font-bold"
-              } mx-2 relative after:content-['|'] after:absolute after:right-[-12px] after:text-gray-700`}
-            >
-              MyPage
-            </button>
-            <button
-              onClick={handleBasketPage}
-              className={`${
-                currentIndex === 0
-                  ? "text-[#EED9C4] font-bold"
-                  : "text-black font-bold"
-              } mx-2`}
-            >
-              Cart
-            </button>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+
+      {/* 모바일 드롭다운 메뉴 */}
+      {isMobileMenuOpen && (
+        <div className={`lg:hidden absolute top-16 sm:top-18 md:top-20 left-0 w-full z-40 ${
+          currentIndex === 0 
+            ? "bg-transparent" 
+            : "bg-white shadow-lg"
+        }`}>
+          <div className="px-4 py-2 space-y-3">
+            {/* 네비게이션 링크 */}
+            <Link
+              to={{ pathname: "/product", state: loginUser }}
+              className={`block py-2 ${
+                currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+              } font-bold`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              product shop
+            </Link>
+            <Link
+              to={{ pathname: "/reservation", state: loginUser }}
+              className={`block py-2 ${
+                currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+              } font-bold`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              reservation
+            </Link>
+
+            {/* 사용자 메뉴 */}
+            <hr className={`my-2 ${currentIndex === 0 ? "border-[#EED9C4]" : "border-gray-300"}`} />
+            
+            {loginUser ? (
+              <>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-2 ${
+                    currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                  } font-bold`}
+                >
+                  LogOut
+                </button>
+
+                {loginUser.userId === "admin" ? (
+                  <button
+                    onClick={() => {
+                      handleAdmin();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`block w-full text-left py-2 ${
+                      currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                    } font-bold`}
+                  >
+                    Administrator
+                  </button>
+                ) : (
+                  <Link
+                    to={`/member/mypage/${loginUser.userId}`}
+                    className={`block py-2 ${
+                      currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                    } font-bold`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    MyPage
+                  </Link>
+                )}
+
+                {loginUser.userId !== "admin" && (
+                  <button
+                    onClick={() => {
+                      handleBasketPage();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className={`block w-full text-left py-2 ${
+                      currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                    } font-bold`}
+                  >
+                    Cart
+                  </button>
+                )}
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    navigate("/member/login", {
+                      state: { from: location.pathname },
+                    });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-2 ${
+                    currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                  } font-bold`}
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => {
+                    handleMyPage();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-2 ${
+                    currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                  } font-bold`}
+                >
+                  MyPage
+                </button>
+                <button
+                  onClick={() => {
+                    handleBasketPage();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`block w-full text-left py-2 ${
+                    currentIndex === 0 ? "text-[#EED9C4]" : "text-black"
+                  } font-bold`}
+                >
+                  Cart
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

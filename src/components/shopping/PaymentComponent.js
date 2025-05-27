@@ -210,7 +210,7 @@ const PaymentComponent = () => {
     );
   };
 
-  return (
+ return (
     <div>
       <MainMenubar />
 
@@ -224,13 +224,13 @@ const PaymentComponent = () => {
         onApplyPoint={applyPoint}
       />
 
-      <div className="h-auto min-h-[89.9vh] mt-24 bg-gray-100 flex flex-col md:flex-row items-start justify-center p-6 gap-8">
+      <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row items-start justify-center p-6 gap-8 pt-20 sm:pt-22 md:pt-24 lg:pt-32">
         {/* 왼쪽 - 배송 정보 */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white shadow-2xl rounded-2xl p-8 w-full md:w-2/3  h-auto min-h-[85vh] "
+          className="bg-white shadow-2xl rounded-2xl p-8 w-full md:w-2/3 h-auto"
         >
           <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
             {isDirectPurchase ? (

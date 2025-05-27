@@ -109,119 +109,118 @@ const MyPageModify = ({ userData, refreshData, userId }) => {
   };
 
   return (
-    // <div className="flex justify-end ml-20 min-h-[92vh] ">
-    <div className="flex justify-end ml-[1rem] mt-[0.5rem] min-h-[92vh] select-none">
-      <div className="bg-white p-8 rounded-lg shadow-lg mt-20 w-full">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 border-b pb-4 select-none">
-          회원정보 수정
-        </h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mt-8 mb-6 pl-32">
-            <label
-              htmlFor="userId"
-              className="block text-sm font-semibold text-gray-700 select-none"
-            >
-              아이디(수정 X):
-            </label>
-            <input
-              type="text"
-              id="userId"
-              name="userId"
-              value={modifiedUserData.userId}
-              className="w-3/5 p-3 mt-2 rounded-md border focus:outline-none cursor-default"
-              readOnly
-            />
-          </div>
+ <div className="flex justify-end ml-0 lg:ml-[1rem] mt-0 lg:mt-[0.5rem] min-h-[92vh] select-none">
+   <div className="bg-white p-4 lg:p-8 rounded-lg shadow-lg lg:mt-20 w-full">
+     <h2 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-6 border-b pb-4 select-none">
+       회원정보 수정
+     </h2>
+     <form onSubmit={handleSubmit}>
+       <div className="mt-8 mb-6 pl-4 lg:pl-32">
+         <label
+           htmlFor="userId"
+           className="block text-sm font-semibold text-gray-700 select-none"
+         >
+           아이디(수정 X):
+         </label>
+         <input
+           type="text"
+           id="userId"
+           name="userId"
+           value={modifiedUserData.userId}
+           className="w-full lg:w-3/5 p-3 mt-2 rounded-md border focus:outline-none cursor-default"
+           readOnly
+         />
+       </div>
 
-          <div className="mb-6 pl-32">
-            <label
-              htmlFor="userName"
-              className="block text-sm font-semibold text-gray-700 select-none"
-            >
-              이름<span className="text-red-500 ml-1">*</span>
-            </label>
-            <input
-              type="text"
-              id="userName"
-              name="userName"
-              value={modifiedUserData.userName}
-              onChange={handleChange}
-              className="w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+       <div className="mb-6 pl-4 lg:pl-32">
+         <label
+           htmlFor="userName"
+           className="block text-sm font-semibold text-gray-700 select-none"
+         >
+           이름<span className="text-red-500 ml-1">*</span>
+         </label>
+         <input
+           type="text"
+           id="userName"
+           name="userName"
+           value={modifiedUserData.userName}
+           onChange={handleChange}
+           className="w-full lg:w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-orange-400"
+         />
+       </div>
 
-          <div className="mb-6 pl-32">
-            <label
-              htmlFor="userEmail"
-              className="block text-sm font-semibold text-gray-700 select-none"
-            >
-              이메일<span className="text-red-500 ml-1">*</span>
-            </label>
-            <input
-              type="email"
-              id="userEmail"
-              name="userEmail"
-              value={modifiedUserData.userEmail}
-              onChange={handleChange}
-              className="w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+       <div className="mb-6 pl-4 lg:pl-32">
+         <label
+           htmlFor="userEmail"
+           className="block text-sm font-semibold text-gray-700 select-none"
+         >
+           이메일<span className="text-red-500 ml-1">*</span>
+         </label>
+         <input
+           type="email"
+           id="userEmail"
+           name="userEmail"
+           value={modifiedUserData.userEmail}
+           onChange={handleChange}
+           className="w-full lg:w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-orange-400"
+         />
+       </div>
 
-          <div className="mb-6 pl-32">
-            <label
-              htmlFor="userAddress"
-              className="block text-sm font-semibold text-gray-700 select-none"
-            >
-              주소<span className="text-red-500 ml-1">*</span>
-            </label>
-            <input
-              type="text"
-              id="userAddress"
-              name="userAddress"
-              value={modifiedUserData.userAddress}
-              onChange={handleChange}
-              className="w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-orange-400"
-            />
-          </div>
+       <div className="mb-6 pl-4 lg:pl-32">
+         <label
+           htmlFor="userAddress"
+           className="block text-sm font-semibold text-gray-700 select-none"
+         >
+           주소<span className="text-red-500 ml-1">*</span>
+         </label>
+         <input
+           type="text"
+           id="userAddress"
+           name="userAddress"
+           value={modifiedUserData.userAddress}
+           onChange={handleChange}
+           className="w-full lg:w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-orange-400"
+         />
+       </div>
 
-          <div className="mb-6 pl-32">
-            <label
-              htmlFor="userPhoneNum"
-              className="block text-sm font-semibold text-gray-700 select-none"
-            >
-              전화번호<span className="text-red-500 ml-1">*</span>
-            </label>
-            <input
-              type="text"
-              id="userPhoneNum"
-              name="userPhoneNum"
-              value={modifiedUserData.userPhoneNum}
-              onChange={handleChange}
-              placeholder="휴대폰 번호를 입력해주세요"
-              className={`w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 ${
-                phoneError
-                  ? "border-red-500 ring-red-300"
-                  : "focus:ring-orange-400"
-              }`}
-              maxLength="13"
-            />
-            {phoneError && (
-              <p className="text-red-500 text-sm mt-1">{phoneError}</p>
-            )}
-          </div>
+       <div className="mb-6 pl-4 lg:pl-32">
+         <label
+           htmlFor="userPhoneNum"
+           className="block text-sm font-semibold text-gray-700 select-none"
+         >
+           전화번호<span className="text-red-500 ml-1">*</span>
+         </label>
+         <input
+           type="text"
+           id="userPhoneNum"
+           name="userPhoneNum"
+           value={modifiedUserData.userPhoneNum}
+           onChange={handleChange}
+           placeholder="휴대폰 번호를 입력해주세요"
+           className={`w-full lg:w-3/5 p-3 mt-2 rounded-md border focus:outline-none focus:ring-2 ${
+             phoneError
+               ? "border-red-500 ring-red-300"
+               : "focus:ring-orange-400"
+           }`}
+           maxLength="13"
+         />
+         {phoneError && (
+           <p className="text-red-500 text-sm mt-1">{phoneError}</p>
+         )}
+       </div>
 
-          <div className="pl-32">
-            <button
-              type="submit"
-              className="w-3/5 py-3 mt-4 bg-orange-400 hover:bg-[#E87A2D] text-white font-semibold rounded-md select-none"
-            >
-              저장
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+       <div className="pl-4 lg:pl-32">
+         <button
+           type="submit"
+           className="w-full lg:w-3/5 py-3 mt-4 bg-orange-400 hover:bg-[#E87A2D] text-white font-semibold rounded-md select-none"
+         >
+           저장
+         </button>
+       </div>
+     </form>
+   </div>
+ </div>
+);
 };
 
 export default MyPageModify;
