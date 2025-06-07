@@ -73,6 +73,17 @@ const ReadComponent = () => {
     }
   };
 
+  // 설명 줄바꿈 추가
+  const formatDescription = (text) => {
+  if (!text) return "";
+  return text.split("\n").map((line, index) => (
+    <React.Fragment key={index}>
+      {line}
+      <br />
+    </React.Fragment>
+  ));
+};
+
   // 바로구매 기능
   const handleDirectPurchase = () => {
     // 로그인한 경우에만 바로구매 가능
@@ -164,7 +175,7 @@ return (
                 <div className="mt-4 p-3 border rounded-lg">
                   <p className="font-bold">상품설명</p>
                   <p className="text-gray-600 text-sm mt-1">
-                    {product.productDTO.pdesc}
+                    {formatDescription(product.productDTO.pdesc)}
                   </p>
                 </div>
 
@@ -234,7 +245,7 @@ return (
               {/* 상품 설명 */}
               <div className="border-t border-gray-200 pt-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">상품설명</h3>
-                <p className="text-gray-700 leading-relaxed text-base">{product.productDTO.pdesc}</p>
+                <p className="text-gray-700 leading-relaxed text-base">{formatDescription(product.productDTO.pdesc)}</p>
               </div>
             </div>
 
