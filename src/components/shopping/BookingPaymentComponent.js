@@ -190,7 +190,7 @@ const BookingPaymentComponent = () => {
 
     const imp = window.IMP; // 아이엠포트 객체
 
-    imp.init("%REACT_APP_IMP_MERCHANT_ID%");
+    imp.init(process.env.REACT_APP_IMP_MERCHANT_ID);
 
     imp.request_pay(
       {
