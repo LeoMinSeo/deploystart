@@ -55,7 +55,7 @@ const ReviewModal = ({ isOpen, onClose, item, onSuccess }) => {
               src={
                 item.imgFileName
                   ? `https://audimew.shop/api/product/view/s_${item.imgFileName}`
-                  : "/images/defalt.jpg"
+                  : "/images/defalt.png"
               }
               alt={item.productName}
               className="w-20 h-20 object-contain rounded-lg mr-4"
